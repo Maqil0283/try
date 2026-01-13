@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wedding Invitation — Aqil & Alya</title>
-  <meta name="description" content="A romantic, minimalist wedding invitation with an opening door animation. Scroll to explore." />
+  <title>Engagement Invitation — Aqil & Alya</title>
+  <meta name="description" content="A romantic, minimalist engagement invitation with an opening door animation. Scroll to explore." />
 
   <!-- Readable, elegant fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,15 +72,13 @@
       text-shadow: 0 2px 6px rgba(0,0,0,0.08); pointer-events: none;
     }
     .monogram .ampersand { color: var(--gold); margin: 0 6px; }
-    .intro-sub { position: absolute; bottom: 84px; left: 0; right: 0; text-align: center; color: var(--muted); }
-    .btn.enter { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); }
 
     /* Hero (no image, soft gradient) */
     .hero {
       position: relative; height: 64vh; display: grid; place-items: center; overflow: hidden;
       background: linear-gradient(180deg, rgba(122,78,138,0.14), rgba(122,78,138,0.08));
     }
-    .hero-content { text-align: center; padding: 0 1.2rem; color: #1f1f1f; }
+    .hero-content { text-align: center; padding: 0 1.2rem; color: var(--text); }
     .couple {
       font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.9rem, 6vw, 2.8rem); letter-spacing: 0.2px; margin: 0.25rem 0;
     }
@@ -95,9 +93,9 @@
       font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; text-align: center; margin: 0 0 1rem;
     }
 
-    /* Timeline (minimal cards) */
+    /* Timeline (minimal cards, centered text) */
     .timeline { display: grid; gap: 0.8rem; }
-    .card { background: var(--card); border-radius: 14px; padding: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .card { background: var(--card); border-radius: 14px; padding: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.06); text-align: center; }
     .card h3 { font-family: 'Playfair Display', Georgia, serif; margin: 0 0 0.4rem; font-size: 1.1rem; }
 
     /* Events */
@@ -132,16 +130,13 @@
 </head>
 <body>
 
-  <!-- Intro: opening doors -->
-  <div id="intro" class="intro" aria-label="Invitation intro (tap to enter)">
+  <!-- Intro: opening doors (no text, no button; auto-open via JS) -->
+  <div id="intro" class="intro" aria-label="Invitation intro">
     <div class="intro-backdrop"></div>
     <div class="intro-frame">
       <div class="door left" aria-hidden="true"><div class="door-ornament"></div><div class="door-knob"></div></div>
       <div class="door right" aria-hidden="true"><div class="door-ornament"></div><div class="door-knob"></div></div>
-
       <div class="monogram"><span class="initial">A</span><span class="ampersand">&amp;</span><span class="initial">A</span></div>
-      <p class="intro-sub">With love, you're invited</p>
-      <button id="enterBtn" class="btn primary enter">Tap to enter</button>
     </div>
   </div>
 
@@ -167,34 +162,31 @@
           <h3>First Meet</h3>
           <p>We met in [place] back in [year]. It started with a smile and a shared love for [something].</p>
         </article>
+        <!-- Removed "The Proposal" as requested -->
         <article class="card">
-          <h3>The Proposal</h3>
-          <p>On [date], beneath the [location], we chose forever.</p>
-        </article>
-        <article class="card">
-          <h3>Tie the Knot</h3>
-          <p>Join us as we begin our next chapter together.</p>
+          <h3>Engagement</h3>
+          <p>Join us to celebrate our engagement and the beginning of our next chapter.</p>
         </article>
       </div>
     </section>
 
     <!-- Event Details -->
     <section class="section reveal" id="details">
-      <h2 class="section-title">Event Details</h2>
+      <h2 class="section-title">Engagement Details</h2>
       <div class="events">
         <article class="event-card">
-          <h3>Nikah</h3>
+          <h3>Engagement Ceremony</h3>
           <p><strong>Date:</strong> May 30, 2026</p>
           <p><strong>Time:</strong> 11:00 AM</p>
-          <p><strong>Venue:</strong> Masjid [Name], Bandar Baru Bangi</p>
-          <p><a class="link" href="https://maps.google.com/?q=Masjid%20Bandar%20Baru%20Bangi" target="_blank" rel="noopener">Open in Google Maps</a></p>
+          <p><strong>Venue:</strong> [Venue Name], Bandar Baru Bangi</p>
+          <p><a class="link" href="https://maps.google.com/?q=Bandar%20Baru%20Bangi" target="_blank" rel="noopener">Open in Google Maps</a></p>
         </article>
         <article class="event-card">
-          <h3>Reception</h3>
+          <h3>Family Reception</h3>
           <p><strong>Date:</strong> May 30, 2026</p>
           <p><strong>Time:</strong> 7:30 PM</p>
-          <p><strong>Venue:</strong> Dewan [Name], Bandar Baru Bangi</p>
-          <p><a class="link" href="https://maps.google.com/?q=Dewan%20Bandar%20Baru%20Bangi" target="_blank" rel="noopener">Open in Google Maps</a></p>
+          <p><strong>Venue:</strong> [Hall Name], Bandar Baru Bangi</p>
+          <p><a class="link" href="https://maps.google.com/?q=Bandar%20Baru%20Bangi" target="_blank" rel="noopener">Open in Google Maps</a></p>
         </article>
       </div>
 
@@ -209,11 +201,11 @@
       <p style="text-align:center; color: var(--muted);">We’d love to know if you can make it. Kindly RSVP by May 15, 2026.</p>
       <p style="text-align:center;">
         <!-- Put your Google Form link below -->
-        <a id="googleFormLink" class="btn outline" href="https://forms.gle/your-form-id" target="_blank" rel="noopener">Open RSVP Form</a>
+        <a id="googleFormLink" class="link" href="https://forms.gle/your-form-id" target="_blank" rel="noopener">Open RSVP Form</a>
       </p>
       <p style="text-align:center;">
         <!-- Or WhatsApp (replace phone & message) -->
-        <a class="btn primary" href="https://wa.me/60123456789?text=Hi%20Aqil%20and%20Alya,%20I%20will%20attend%20on%20May%2030,%202026%20(%5Bnumber%20of%20guests%5D)." target="_blank" rel="noopener">RSVP via WhatsApp</a>
+        <a class="link" href="https://wa.me/60123456789?text=Hi%20Aqil%20and%20Alya,%20I%20will%20attend%20on%20May%2030,%202026%20(%5Bnumber%20of%20guests%5D)." target="_blank" rel="noopener">RSVP via WhatsApp</a>
       </p>
     </section>
   </main>
@@ -224,23 +216,17 @@
   </footer>
 
   <script>
-    // --- Opening door intro ---
+    // --- Auto-open doors (no button, no tagline) ---
     const intro = document.getElementById('intro');
-    const enterBtn = document.getElementById('enterBtn');
     const introFrame = document.querySelector('.intro-frame');
-
-    function openDoors() {
+    setTimeout(() => {
       introFrame.classList.add('open');
       setTimeout(() => {
         intro.style.transition = 'opacity 600ms ease';
         intro.style.opacity = '0';
         setTimeout(() => { intro.style.display = 'none'; }, 600);
       }, 950);
-    }
-    enterBtn.addEventListener('click', openDoors);
-    intro.addEventListener('click', (e) => {
-      if (e.target === intro || e.target.classList.contains('intro-backdrop')) openDoors();
-    });
+    }, 1200);
 
     // --- Reveal on scroll ---
     const observer = new IntersectionObserver((entries) => {
@@ -275,9 +261,9 @@
 
     // --- Add to Calendar (ICS) ---
     document.getElementById('addToCalendarBtn').addEventListener('click', () => {
-      const title = 'Wedding: Aqil & Alya';
-      const location = 'Masjid [Name], Bandar Baru Bangi';
-      const description = 'You are invited to our wedding!';
+      const title = 'Engagement: Aqil & Alya';
+      const location = '[Venue Name], Bandar Baru Bangi';
+      const description = 'You are invited to our engagement!';
       // 30 May 2026, 11:00–13:00 MYT (UTC+8)
       const start = new Date('2026-05-30T11:00:00+08:00');
       const end   = new Date('2026-05-30T13:00:00+08:00');
@@ -288,7 +274,7 @@
       }
 
       const ics = [
-        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//AqilAlya Wedding Invite//EN','BEGIN:VEVENT',
+        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//AqilAlya Engagement Invite//EN','BEGIN:VEVENT',
         `DTSTAMP:${toICSDate(new Date())}`,
         `DTSTART:${toICSDate(start)}`,
         `DTEND:${toICSDate(end)}`,
@@ -299,7 +285,7 @@
       const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url; a.download = 'wedding-invite.ics';
+      a.href = url; a.download = 'engagement-invite.ics';
       document.body.appendChild(a); a.click(); a.remove();
       URL.revokeObjectURL(url);
     });
