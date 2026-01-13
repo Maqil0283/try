@@ -1,352 +1,230 @@
 
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jemputan Perkahwinan — Aqil & Alya</title>
-  <meta name="description" content="Jemputan perkahwinan romantik dengan animasi pintu. Ketik untuk masuk, skrol untuk lihat isi kandungan." />
+  <title>Wedding Invitation — Aqil & Alya</title>
+  <meta name="description" content="A romantic, minimalist wedding invitation with an opening door animation. Scroll to explore." />
 
-  <!-- Fonts -->
+  <!-- Readable, elegant fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #fffaf8;                /* warm blush */
-      --text: #2a1f27;              /* deep cocoa */
-      --muted: #6b5a64;
-      --primary: #b07aa1;           /* dusty rose/plum */
+      /* Minimalist romantic palette (high contrast for readability) */
+      --bg: #fff7f4;              /* soft blush */
+      --text: #1f1f1f;            /* deep neutral */
+      --muted: #5f5560;           /* subtle captions */
+      --primary: #7a4e8a;         /* romantic plum */
       --primary-contrast: #ffffff;
-      --accent: #f6dfec;            /* light blush */
-      --gold: #cfa66a;              /* soft gold accents */
+      --accent: #efe6f7;          /* gentle tint for chips/buttons */
+      --gold: #cfa66a;            /* soft gold accent */
       --card: #ffffff;
-      --shadow: 0 10px 28px rgba(0,0,0,0.09);
+      --shadow: 0 8px 24px rgba(0,0,0,0.08);
+      --divider: rgba(0,0,0,0.06);
     }
 
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
     body {
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.6;
+      font-size: 16px; line-height: 1.7; color: var(--text); background: var(--bg);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Decorative background */
+    /* Subtle ambient background glow (no images) */
     body::before {
-      content: "";
-      position: fixed; inset: 0;
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
       background:
-        radial-gradient(30% 40% at 0% 0%, rgba(255,220,240,0.35), transparent 60%),
-        radial-gradient(35% 45% at 100% 100%, rgba(255,210,230,0.30), transparent 60%);
-      pointer-events: none;
-      z-index: -1;
+        radial-gradient(40% 40% at 0% 0%, rgba(255,210,230,0.24), transparent 60%),
+        radial-gradient(35% 35% at 100% 100%, rgba(235,220,250,0.22), transparent 60%);
     }
 
-    /* Opening intro with doors */
-    .intro {
-      position: fixed; inset: 0; z-index: 9999;
-      display: grid; place-items: center;
-      overflow: hidden;
-    }
-    .intro-backdrop {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, #fbe8f2, #fffaf5);
-    }
+    /* Opening intro with elegant doors */
+    .intro { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; overflow: hidden; }
+    .intro-backdrop { position: absolute; inset: 0; background: linear-gradient(135deg, #fbe8f2, #fffaf5); }
     .intro-frame {
-      position: relative;
-      width: min(92vw, 560px);
-      height: min(70vh, 700px);
-      perspective: 1600px;
-      border: 1px solid rgba(207,166,106,0.35);
-      border-radius: 22px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-      background: #fffaf7;
-      overflow: hidden;
+      position: relative; width: min(92vw, 560px); height: min(70vh, 700px);
+      perspective: 1600px; border: 1px solid rgba(207,166,106,0.35); border-radius: 22px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12); background: #fffaf7; overflow: hidden;
     }
-
-    /* Doors */
     .door {
-      position: absolute; top: 0;
-      width: 50%; height: 100%;
-      transform-style: preserve-3d;
-      background: linear-gradient(180deg, #fff5f9, #f7e3ef);
-      box-shadow: inset 0 0 0 1px rgba(207,166,106,0.35);
+      position: absolute; top: 0; width: 50%; height: 100%; transform-style: preserve-3d;
+      background: linear-gradient(180deg, #fff5f9, #f7e3ef); box-shadow: inset 0 0 0 1px rgba(207,166,106,0.35);
     }
     .door.left { left: 0; transform-origin: left center; }
     .door.right { right: 0; transform-origin: right center; }
-    .door-ornament {
-      position: absolute; inset: 26px;
-      border: 2px solid var(--gold);
-      border-radius: 18px;
-      box-shadow: inset 0 0 12px rgba(207,166,106,0.24);
-    }
+    .door-ornament { position: absolute; inset: 26px; border: 2px solid var(--gold); border-radius: 18px; box-shadow: inset 0 0 12px rgba(207,166,106,0.24); }
     .door-knob {
-      position: absolute; top: 50%; width: 14px; height: 14px;
-      margin-top: -7px; border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff, #cfa66a);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      position: absolute; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, #cfa66a); box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
-    .door.left .door-knob { right: 18px; }
-    .door.right .door-knob { left: 18px; }
-
-    /* Opening animation states */
+    .door.left .door-knob { right: 18px; } .door.right .door-knob { left: 18px; }
     .open .door.left  { transform: rotateY(-100deg); transition: transform 900ms cubic-bezier(.2,.7,.2,1); }
     .open .door.right { transform: rotateY( 100deg); transition: transform 900ms cubic-bezier(.2,.7,.2,1); }
 
-    /* Monogram & CTA */
     .monogram {
-      position: absolute; inset: 0;
-      display: grid; place-items: center;
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.4rem, 8vw, 4rem);
-      color: var(--text);
-      pointer-events: none;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: absolute; inset: 0; display: grid; place-items: center;
+      font-family: 'Great Vibes', cursive; font-size: clamp(2.6rem, 8vw, 4.2rem); color: var(--text);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.08); pointer-events: none;
     }
-    .monogram .initial { letter-spacing: 2px; }
     .monogram .ampersand { color: var(--gold); margin: 0 6px; }
-    .intro-sub {
-      position: absolute; bottom: 84px; left: 0; right: 0;
-      text-align: center; color: var(--muted);
-    }
-    .btn.enter {
-      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-    }
+    .intro-sub { position: absolute; bottom: 84px; left: 0; right: 0; text-align: center; color: var(--muted); }
+    .btn.enter { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); }
 
-    /* Hero */
-    .hero { position: relative; height: 80vh; display: grid; place-items: center; overflow: hidden; }
-    .hero-bg {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(0.68) saturate(1.05);
-      transform: translateY(0);
-      transition: transform 0.1s linear;
+    /* Hero (no image, soft gradient) */
+    .hero {
+      position: relative; height: 64vh; display: grid; place-items: center; overflow: hidden;
+      background: linear-gradient(180deg, rgba(122,78,138,0.14), rgba(122,78,138,0.08));
     }
-    .hero-content { position: relative; text-align: center; padding: 0 1.2rem; color: #fff; }
+    .hero-content { text-align: center; padding: 0 1.2rem; color: #1f1f1f; }
     .couple {
-      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-      font-size: 2.3rem; margin: 0.2rem 0;
+      font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.9rem, 6vw, 2.8rem); letter-spacing: 0.2px; margin: 0.25rem 0;
     }
-    .date { font-size: 1rem; color: #f6eefa; margin-bottom: 1rem; }
+    .date { font-size: 1rem; color: var(--muted); margin-bottom: 1rem; }
     .countdown { font-weight: 600; margin-bottom: 1rem; }
     .hero-cta { display: flex; gap: 10px; justify-content: center; }
 
     /* Sections */
-    .section { padding: 2.2rem 1.2rem; max-width: 880px; margin: 0 auto; }
+    .section { padding: 2rem 1.2rem; max-width: 860px; margin: 0 auto; }
+    .section + .section { border-top: 1px solid var(--divider); }
     .section-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.6rem; margin: 0 0 1rem; text-align: center;
+      font-family: 'Playfair Display', Georgia, serif; font-size: 1.4rem; text-align: center; margin: 0 0 1rem;
     }
 
-    /* TOC */
-    .toc-list { list-style: none; padding: 0; margin: 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .toc-list a { background: #fff; padding: 8px 12px; border-radius: 999px; box-shadow: var(--shadow); text-decoration: none; color: var(--text); }
-
-    /* Timeline */
-    .timeline { display: grid; gap: 1rem; }
-    .card {
-      background: var(--card); border-radius: 16px; padding: 1rem; box-shadow: var(--shadow);
-    }
+    /* Timeline (minimal cards) */
+    .timeline { display: grid; gap: 0.8rem; }
+    .card { background: var(--card); border-radius: 14px; padding: 1rem; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .card h3 { font-family: 'Playfair Display', Georgia, serif; margin: 0 0 0.4rem; font-size: 1.1rem; }
 
     /* Events */
-    .events { display: grid; gap: 1rem; }
-    .event-card { background: var(--card); border-left: 6px solid var(--primary); padding: 1rem; border-radius: 12px; box-shadow: var(--shadow); }
-    .event-card h3 { margin-top: 0; }
-    .link { color: var(--primary); text-decoration: none; font-weight: 600; }
-    .link:hover { text-decoration: underline; }
-    .cta-row { display: flex; justify-content: center; margin-top: 0.5rem; }
+    .events { display: grid; gap: 0.8rem; }
+    .event-card { background: var(--card); border-left: 4px solid var(--primary); padding: 1rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .event-card h3 { margin: 0 0 0.2rem; font-family: 'Playfair Display', Georgia, serif; }
 
-    /* Gallery */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-    }
-    .grid-img {
-      width: 100%; height: 120px; object-fit: cover; border-radius: 10px; cursor: pointer; box-shadow: var(--shadow);
-    }
-
-    /* Lightbox */
-    .lightbox {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-      display: none; align-items: center; justify-content: center; z-index: 9998;
-    }
-    .lightbox img { max-width: min(92vw, 1000px); max-height: 80vh; border-radius: 8px; }
-    .lightbox-close {
-      position: absolute; top: 14px; right: 16px; background: transparent; color: #fff; font-size: 2rem; border: none; cursor: pointer;
-    }
-
-    /* Buttons */
+    /* Buttons & links */
     .btn {
       display: inline-block; border: none; border-radius: 999px; padding: 0.7rem 1.2rem; font-weight: 600; cursor: pointer;
-      text-decoration: none; transition: transform 0.08s ease;
+      text-decoration: none; transition: transform 0.08s ease; font-size: 0.95rem;
     }
     .btn:active { transform: scale(0.98); }
     .btn.primary { background: var(--primary); color: var(--primary-contrast); }
-    .btn.outline { background: transparent; border: 2px solid #fff; color: #fff; }
+    .btn.outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
     .btn.secondary { background: var(--accent); color: var(--text); }
     .btn.small { padding: 0.5rem 0.8rem; font-size: 0.9rem; }
+    .link { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .link:hover { text-decoration: underline; }
 
     /* Footer */
     .footer { text-align: center; padding: 2rem 1rem; color: var(--muted); }
 
-    /* Reveal animations */
+    /* Reveal on scroll */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity 500ms ease, transform 500ms ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* Responsive tweaks */
-    @media (max-width: 720px) {
-      .grid { grid-template-columns: 1fr 1fr; }
-      .grid-img { height: 110px; }
-    }
-    @media (max-width: 480px) {
-      .grid { grid-template-columns: 1fr; }
-      .grid-img { height: 200px; }
-      .hero { height: 72vh; }
-    }
+    @media (max-width: 720px) { .hero { height: 58vh; } }
+    @media (max-width: 480px) { .hero { height: 54vh; } }
   </style>
 </head>
 <body>
 
-  <!-- Opening Door Intro -->
-  <div id="intro" class="intro" aria-label="Pengenalan jemputan (ketik untuk masuk)">
+  <!-- Intro: opening doors -->
+  <div id="intro" class="intro" aria-label="Invitation intro (tap to enter)">
     <div class="intro-backdrop"></div>
     <div class="intro-frame">
-      <div class="door left" aria-hidden="true">
-        <div class="door-ornament"></div>
-        <div class="door-knob"></div>
-      </div>
-      <div class="door right" aria-hidden="true">
-        <div class="door-ornament"></div>
-        <div class="door-knob"></div>
-      </div>
+      <div class="door left" aria-hidden="true"><div class="door-ornament"></div><div class="door-knob"></div></div>
+      <div class="door right" aria-hidden="true"><div class="door-ornament"></div><div class="door-knob"></div></div>
 
-      <div class="monogram">
-        <span class="initial">A</span>
-        <span class="ampersand">&amp;</span>
-        <span class="initial">A</span>
-      </div>
-      <p class="intro-sub">Dengan penuh kasih, kami menjemput anda</p>
-      <button id="enterBtn" class="btn primary enter">Ketik untuk masuk</button>
+      <div class="monogram"><span class="initial">A</span><span class="ampersand">&amp;</span><span class="initial">A</span></div>
+      <p class="intro-sub">With love, you're invited</p>
+      <button id="enterBtn" class="btn primary enter">Tap to enter</button>
     </div>
   </div>
 
-  <!-- Hero with proper <img> -->
-  <header class="hero parallax">
-    <img class="hero-bg" alt="Latar romantik" src="https://images.unsplash.com/photo-1519741491157-39a6baf2f7f4?q=80&w=1600&auto=format&fit=crop" />
+  <!-- Hero (no images) -->
+  <header class="hero">
     <div class="hero-content">
       <h1 class="couple reveal">Aqil &amp; Alya</h1>
-      <p class="date reveal">Sabtu, 30 Mei 2026 • 11:00 pagi</p>
+      <p class="date reveal">Saturday, May 30, 2026 • 11:00 AM</p>
       <div id="countdown" class="countdown reveal" aria-live="polite"></div>
       <div class="hero-cta reveal">
-        <a class="btn outline" href="#rsvp">RSVP</a>
-        <a class="btn outline" href="#details">Butiran Majlis</a>
+        <a href="#details" class="btn outline">Event Details</a>
+        <a href="#rsvp" class="btn primary">RSVP</a>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- Isi Kandungan -->
-    <nav class="toc section reveal" aria-label="Isi kandungan">
-      <h2 class="section-title">Isi Kandungan</h2>
-      <ul class="toc-list">
-        <li><a href="#story">Kisah Kami</a></li>
-        <li><a href="#details">Butiran Majlis</a></li>
-        <li><a href="#gallery">Galeri</a></li>
-        <li><a href="#rsvp">RSVP</a></li>
-      </ul>
-    </nav>
-
-    <!-- Story / Timeline -->
+    <!-- Story -->
     <section class="section reveal" id="story">
-      <h2 class="section-title">Kisah Kami</h2>
+      <h2 class="section-title">Our Story</h2>
       <div class="timeline">
         <article class="card">
-          <h3>Pertemuan Pertama</h3>
-          <p>Kami bertemu di [tempat] pada tahun [tahun]. Bermula dengan senyuman dan minat terhadap [perkara].</p>
+          <h3>First Meet</h3>
+          <p>We met in [place] back in [year]. It started with a smile and a shared love for [something].</p>
         </article>
         <article class="card">
-          <h3>Lamarannya</h3>
-          <p>Pada [tarikh], di bawah [lokasi], kami berjanji untuk selamanya.</p>
+          <h3>The Proposal</h3>
+          <p>On [date], beneath the [location], we chose forever.</p>
         </article>
         <article class="card">
-          <h3>Ikatan Abadi</h3>
-          <p>Ayuh bersama meraikan permulaan bab baru kehidupan kami.</p>
+          <h3>Tie the Knot</h3>
+          <p>Join us as we begin our next chapter together.</p>
         </article>
       </div>
     </section>
 
     <!-- Event Details -->
     <section class="section reveal" id="details">
-      <h2 class="section-title">Butiran Majlis</h2>
+      <h2 class="section-title">Event Details</h2>
       <div class="events">
         <article class="event-card">
           <h3>Nikah</h3>
-          <p><strong>Tarikh:</strong> 30 Mei 2026</p>
-          <p><strong>Masa:</strong> 11:00 pagi</p>
-          <p><strong>Lokasi:</strong> Masjid [Nama], Bandar Baru Bangi</p>
-          <p><a class="link" target="_blank" rel="noopener" href="https://maps.google.com/?q=Masjid%20Bandar%20Baru%20Bangi">Buka Google Maps</a></p>
+          <p><strong>Date:</strong> May 30, 2026</p>
+          <p><strong>Time:</strong> 11:00 AM</p>
+          <p><strong>Venue:</strong> Masjid [Name], Bandar Baru Bangi</p>
+          <p><a class="link" href="https://maps.google.com/?q=Masjid%20Bandar%20Baru%20Bangi" target="_blank" rel="noopener">Open in Google Maps</a></p>
         </article>
         <article class="event-card">
-          <h3>Resepsi</h3>
-          <p><strong>Tarikh:</strong> 30 Mei 2026</p>
-          <p><strong>Masa:</strong> 7:30 malam</p>
-          <p><strong>Lokasi:</strong> Dewan [Nama], Bandar Baru Bangi</p>
-          <p><a class="link" target="_blank" rel="noopener" href="https://maps.google.com/?q=Dewan%20Bandar%20Baru%20Bangi">Buka Google Maps</a></p>
+          <h3>Reception</h3>
+          <p><strong>Date:</strong> May 30, 2026</p>
+          <p><strong>Time:</strong> 7:30 PM</p>
+          <p><strong>Venue:</strong> Dewan [Name], Bandar Baru Bangi</p>
+          <p><a class="link" href="https://maps.google.com/?q=Dewan%20Bandar%20Baru%20Bangi" target="_blank" rel="noopener">Open in Google Maps</a></p>
         </article>
       </div>
 
-      <div class="cta-row">
-        <button id="addToCalendarBtn" class="btn secondary">Tambah ke Kalendar</button>
-      </div>
-    </section>
-
-    <!-- Gallery -->
-    <section class="section reveal" id="gallery">
-      <h2 class="section-title">Galeri</h2>
-      <div class="grid">
-        <!-- Swap these with ./gallery1.jpg etc if you upload your own files -->
-        <img class="grid-img" alt="Foto romantik 1" src="https://images.unsplash.com/photo-1529638395873-5a6131a8f427?q=80&w=800&auto=format&fit=crop" />
-        <img class="grid-img" alt="Foto romantik 2" src="https://images.unsplash.com/photo-1520975889965-c2026dde1bf1?q=80&w=800&auto=format&fit=crop" />
-        <img class="grid-img" alt="Foto romantik 3" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" />
-      </div>
-      <!-- Lightbox -->
-      <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Paparan imej penuh">
-        <button class="lightbox-close" aria-label="Tutup">×</button>
-        <img id="lightbox-img" src="" alt="Paparan penuh" />
+      <div style="display:flex;justify-content:center;margin-top:0.6rem;">
+        <button id="addToCalendarBtn" class="btn secondary">Add to Calendar</button>
       </div>
     </section>
 
     <!-- RSVP -->
     <section class="section reveal" id="rsvp">
       <h2 class="section-title">RSVP</h2>
-      <p class="center">Sudi-sudikan menzahirkan kehadiran sebelum 15 Mei 2026.</p>
-
-      <!-- Option A: Link to Google Form -->
-      <p class="center">
-        <a id="googleFormLink" class="btn primary" target="_blank" rel="noopener" href="https://forms.gle/your-form-id">Buka Borang RSVP</a>
+      <p style="text-align:center; color: var(--muted);">We’d love to know if you can make it. Kindly RSVP by May 15, 2026.</p>
+      <p style="text-align:center;">
+        <!-- Put your Google Form link below -->
+        <a id="googleFormLink" class="btn outline" href="https://forms.gle/your-form-id" target="_blank" rel="noopener">Open RSVP Form</a>
       </p>
-
-      <!-- Option B: WhatsApp message -->
-      <p class="center">
-        <a class="btn secondary" target="_blank" rel="noopener"
-           href="https://wa.me/60123456789?text=Hi%20Aqil%20dan%20Alya,%20Saya%20akan%20hadir%20pada%2030%20Mei%202026%20(%5Bbilangan%20tetamu%5D).">
-          RSVP melalui WhatsApp
-        </a>
+      <p style="text-align:center;">
+        <!-- Or WhatsApp (replace phone & message) -->
+        <a class="btn primary" href="https://wa.me/60123456789?text=Hi%20Aqil%20and%20Alya,%20I%20will%20attend%20on%20May%2030,%202026%20(%5Bnumber%20of%20guests%5D)." target="_blank" rel="noopener">RSVP via WhatsApp</a>
       </p>
     </section>
   </main>
 
   <footer class="footer">
-    <p>Dengan kasih sayang, Aqil &amp; Alya</p>
-    <button class="btn small" id="shareBtn">Kongsi Jemputan</button>
+    <p>With love, Aqil & Alya</p>
+    <button class="btn small" id="shareBtn">Share Invitation</button>
   </footer>
 
   <script>
-    // ----- Opening door intro -----
+    // --- Opening door intro ---
     const intro = document.getElementById('intro');
     const enterBtn = document.getElementById('enterBtn');
     const introFrame = document.querySelector('.intro-frame');
@@ -364,80 +242,42 @@
       if (e.target === intro || e.target.classList.contains('intro-backdrop')) openDoors();
     });
 
-    // ----- Smoothly reveal sections on scroll -----
+    // --- Reveal on scroll ---
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
+      entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.2 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ----- Parallax effect for hero background -----
-    const heroBg = document.querySelector('.hero-bg');
-    window.addEventListener('scroll', () => {
-      const offset = window.scrollY * 0.08;
-      if (heroBg) heroBg.style.transform = `translateY(${offset}px)`;
-    });
-
-    // ----- Countdown to event -----
-    // Set to 30 May 2026, 11:00 AM local time (MYT, UTC+8)
+    // --- Countdown (May 30, 2026 at 11:00 AM local time) ---
     function startCountdown(targetDateStr) {
       const target = new Date(targetDateStr).getTime();
       const el = document.getElementById('countdown');
       function tick() {
         const now = Date.now();
         const diff = target - now;
-        if (diff <= 0) { el.textContent = "Hari ini! Jumpa anda di sana 🎉"; return; }
+        if (diff <= 0) { el.textContent = "It's today! See you there 🎉"; return; }
         const d = Math.floor(diff / (1000*60*60*24));
         const h = Math.floor((diff / (1000*60*60)) % 24);
         const m = Math.floor((diff / (1000*60)) % 60);
-        el.textContent = `${d} hari • ${h} jam • ${m} minit`;
+        el.textContent = `${d} days • ${h} hours • ${m} mins`;
         requestAnimationFrame(tick);
       }
       tick();
     }
     startCountdown('May 30, 2026 11:00:00');
 
-    // ----- Lightbox for gallery -----
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    document.querySelectorAll('.grid-img').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.style.display = 'flex';
-        lightbox.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-    document.querySelector('.lightbox-close').addEventListener('click', () => {
-      lightbox.style.display = 'none';
-      lightbox.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    });
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) document.querySelector('.lightbox-close').click();
-    });
-
-    // ----- Share (Web Share API with fallback) -----
+    // --- Share ---
     document.getElementById('shareBtn').addEventListener('click', async () => {
-      const shareData = {
-        title: document.title,
-        text: 'Jemputan perkahwinan Aqil & Alya 💍',
-        url: window.location.href
-      };
-      if (navigator.share) {
-        try { await navigator.share(shareData); } catch (e) {}
-      } else {
-        await navigator.clipboard.writeText(window.location.href);
-        alert('Pautan telah disalin!');
-      }
+      const shareData = { title: document.title, text: 'Join us on our special day 💍', url: window.location.href };
+      if (navigator.share) { try { await navigator.share(shareData); } catch (e) {} }
+      else { await navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!'); }
     });
 
-    // ----- Add to Calendar (generates ICS file) -----
+    // --- Add to Calendar (ICS) ---
     document.getElementById('addToCalendarBtn').addEventListener('click', () => {
-      const title = 'Majlis Perkahwinan: Aqil & Alya';
-      const location = 'Masjid [Nama], Bandar Baru Bangi';
-      const description = 'Anda dijemput menghadiri majlis kami.';
+      const title = 'Wedding: Aqil & Alya';
+      const location = 'Masjid [Name], Bandar Baru Bangi';
+      const description = 'You are invited to our wedding!';
       // 30 May 2026, 11:00–13:00 MYT (UTC+8)
       const start = new Date('2026-05-30T11:00:00+08:00');
       const end   = new Date('2026-05-30T13:00:00+08:00');
@@ -452,22 +292,17 @@
         `DTSTAMP:${toICSDate(new Date())}`,
         `DTSTART:${toICSDate(start)}`,
         `DTEND:${toICSDate(end)}`,
-        `SUMMARY:${title}`,
-        `LOCATION:${location}`,
-        `DESCRIPTION:${description}`,
+        `SUMMARY:${title}`,`LOCATION:${location}`,`DESCRIPTION:${description}`,
         'END:VEVENT','END:VCALENDAR'
       ].join('\r\n');
 
       const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url; a.download = 'jemputan-perkahwinan.ics';
+      a.href = url; a.download = 'wedding-invite.ics';
       document.body.appendChild(a); a.click(); a.remove();
       URL.revokeObjectURL(url);
     });
-
-    // If you have a real Google Form, set it here:
-    // document.getElementById('googleFormLink').href = 'https://forms.gle/your-form-id';
   </script>
 </body>
 </html>
